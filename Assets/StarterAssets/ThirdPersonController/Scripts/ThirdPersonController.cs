@@ -14,6 +14,8 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
+        public GameObject CameraController; 
+
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -90,6 +92,7 @@ namespace StarterAssets
         // timeout deltatime
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
+        private float _cameraDelta;
 
         // animation IDs
         private int _animIDSpeed;
@@ -97,6 +100,9 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+
+        // fixed timeout stuff
+        private float _basicActionTimeout = 0.10f;
 
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
@@ -159,6 +165,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            PlayerActions();
         }
 
         private void LateUpdate()
@@ -386,6 +393,18 @@ namespace StarterAssets
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+            }
+        }
+
+        private void PlayerActions()
+        {
+            _cameraDelta -= Time.deltaTime;
+            if (_input.focusPressed && _cameraDelta <= 0.0)
+            {
+                CameraController.GetComponent<CameraController>().toggleCamera();
+                _cameraDelta = _basicActionTimeout;
+                print(_input.focusPressed);
+                _input.focusPressed = false;
             }
         }
     }

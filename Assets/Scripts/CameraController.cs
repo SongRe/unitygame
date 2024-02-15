@@ -8,9 +8,16 @@ public class CameraController : MonoBehaviour
     public Cinemachine.CinemachineVirtualCamera mainCamera;
     public Cinemachine.CinemachineVirtualCamera secondaryCamera;
 
+    private GameObject _crossHair;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (brain == null)
+        {
+            brain = GetComponent<Cinemachine.CinemachineBrain>();
+        }
+        _crossHair = GameObject.FindGameObjectWithTag("Crosshair");
         mainCamera.Priority = 1;
         secondaryCamera.Priority = -1;
     }
@@ -18,15 +25,13 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(1)) // Right click
-        {
-            toggleCamera();
-        }
+       
     }
 
-    void toggleCamera()
+    public void toggleCamera()
     {
         mainCamera.Priority *= -1;
         secondaryCamera.Priority *= -1;
+        _crossHair.SetActive(!_crossHair.activeSelf);
     }
 }
