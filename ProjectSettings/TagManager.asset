@@ -9,6 +9,8 @@ TagManager:
   - Camera
   - Canvas
   - Crosshair
+  - CameraController
+  - Indicator
   layers:
   - Default
   - TransparentFX
