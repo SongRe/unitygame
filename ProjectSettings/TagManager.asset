@@ -11,6 +11,7 @@ TagManager:
   - Crosshair
   - CameraController
   - Indicator
+  - Projectile
   layers:
   - Default
   - TransparentFX

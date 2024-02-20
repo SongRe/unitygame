@@ -11,13 +11,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerAbilitiesController : MonoBehaviour
 {
+    
     public float maxDistance = 5.0f;
     public GameObject CameraController;
     public GameObject tempProjectile;
     public GameObject Missile;
 
-    // Indicators
-    public GameObject CircleIndicator;
+
+    // Abilities
+    public GameObject AbilityOne;
+
 
 
     // game objects
@@ -41,7 +44,10 @@ public class PlayerAbilitiesController : MonoBehaviour
     // State variables
     private PlayerConstants.ABILITY_STATE _abilityState;
     private bool _isFocused = false;
-    public GameObject currentIndicator;
+    private GameObject _currentIndicator;
+
+
+    // Ability scripts
 
     private void Awake()
     {
@@ -54,6 +60,11 @@ public class PlayerAbilitiesController : MonoBehaviour
         if (CameraController == null)
         {
             CameraController = GameObject.FindGameObjectWithTag("CameraController");
+        }
+
+        if (AbilityOne == null)
+        {
+            AbilityOne = Instantiate(AbilityOne);
         }
     }
     // Start is called before the first frame update
@@ -73,6 +84,14 @@ public class PlayerAbilitiesController : MonoBehaviour
 
 
 
+    public void OnTriggerEnter(Collider other)
+    {
+        print("player trigger");
+        print(other.GetType());
+    }
+
+
+
     // Public method to be called by input system
     public void OnFire()
     {
@@ -84,29 +103,31 @@ public class PlayerAbilitiesController : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 direction = new Vector3();
+        Vector3 hitPos = new Vector3();
+        bool hasHit = false;
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             Vector3 playerPos = transform.position;
-            Vector3 hitPos = hit.point;
+            hitPos = hit.point;
             playerPos.y = 0;
-
             direction = (hitPos - playerPos).normalized;
-
-            Instantiate(tempProjectile, hit.point, Quaternion.identity);
+            hasHit = true;
+            Instantiate(tempProjectile, hit.point, Quaternion.identity); // helper indicator
         }
-        print("direction: " + direction);
 
         switch (_abilityState)
         {
             case PlayerConstants.ABILITY_STATE.ABILITY_1:
-                
+                if (hasHit)
+                {
+                    AbilityOne.GetComponent<PillarAbilityScript>().Fire(Vector3.up, hitPos);
+                    toggleCamera();
+                }
 
                 break;
             case PlayerConstants.ABILITY_STATE.NONE:
-                if (direction != null)
+                if (hasHit)
                 {
-                    print("trying to fire");
-                    Vector3 spawningPos = transform.position;
                     GameObject missile = Instantiate(Missile, transform.position, Quaternion.identity);
                     missile.GetComponent<BasicMissile>().Fire(direction);
                 }
@@ -119,11 +140,7 @@ public class PlayerAbilitiesController : MonoBehaviour
         _cameraDelta -= Time.deltaTime;
         if (_input.focusPressed && _cameraDelta <= 0.0)
         {
-            CameraController.GetComponent<CameraController>().toggleCamera();
-            _cameraDelta = _basicActionTimeout;
-            print(_input.focusPressed);
-            _input.focusPressed = false;
-            _isFocused = !_isFocused;
+            toggleCamera();
             _abilityState = PlayerConstants.ABILITY_STATE.ABILITY_1;
         }
 
@@ -131,10 +148,10 @@ public class PlayerAbilitiesController : MonoBehaviour
         if (!_isFocused)
         {
             _abilityState = PlayerConstants.ABILITY_STATE.NONE;
-            if (currentIndicator != null)
+            if (_currentIndicator != null)
             {
-                Destroy(currentIndicator);
-                currentIndicator = null;
+                Destroy(_currentIndicator);
+                _currentIndicator = null;
             }
         }
     }
@@ -150,23 +167,28 @@ public class PlayerAbilitiesController : MonoBehaviour
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray, out RaycastHit hit) )
                     {
-                        if (currentIndicator == null)
+                        if (_currentIndicator == null)
                         {
                             Vector3 hitPos = hit.point;
                             hitPos.y = 0.5f;
-                            currentIndicator = Instantiate(CircleIndicator, hitPos, Quaternion.identity);
+                            _currentIndicator = Instantiate(AbilityOne.GetComponent<PillarAbilityScript>().GetIndicator(), hitPos, Quaternion.identity);
                         } else
                         {
-                            print("trying to update current indicator position");
-                            currentIndicator.transform.position = new Vector3(hit.point.x, 0.05f, hit.point.z);
+                            _currentIndicator.transform.position = new Vector3(hit.point.x, 0.05f, hit.point.z);
                         }
-                        
                     }
-
-                    // TODO: show preview
                 }
                 break;
         }
+    }
+
+
+    private void toggleCamera()
+    {
+        CameraController.GetComponent<CameraController>().toggleCamera();
+        _cameraDelta = _basicActionTimeout;
+        _input.focusPressed = false;
+        _isFocused = !_isFocused;
     }
  
 }

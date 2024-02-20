@@ -1252,8 +1252,7 @@ MonoBehaviour:
   CameraController: {fileID: 362182790}
   tempProjectile: {fileID: 2442467916213707565, guid: c6869a28e29c26c40a119f90f03b79a8, type: 3}
   Missile: {fileID: 3503398688207284937, guid: 38c1dd05a7d8730499aa0ff4e2c5ec69, type: 3}
-  CircleIndicator: {fileID: 8711869275732053081, guid: 5b8ab265c6fc99f4babb65e70ea577c4, type: 3}
-  currentIndicator: {fileID: 0}
+  AbilityOne: {fileID: 6907011690483819304, guid: f7957e82d410cbd439fdb370008bb3ac, type: 3}
 --- !u!1 &1764214107
 GameObject:
   m_ObjectHideFlags: 0

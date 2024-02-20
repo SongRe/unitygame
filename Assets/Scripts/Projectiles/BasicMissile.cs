@@ -23,7 +23,6 @@ public class BasicMissile : MonoBehaviour
     public void Fire(Vector3 dir)
     {
         _rigidbody = GetComponent<Rigidbody>();
-        print("In fire");
         _rigidbody.AddForce(dir * force, ForceMode.Impulse);
     }
 }
