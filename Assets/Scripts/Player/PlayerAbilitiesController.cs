@@ -97,7 +97,8 @@ public class PlayerAbilitiesController : MonoBehaviour
         //BasicMissile basicMissileScript = other.GetComponent<BasicMissile>();
         if (otherAbility != null)
         {
-            print(otherAbility._instantiator);
+            CombatEntity attacker = otherAbility._instantiator;
+            attacker.Attack(ref _player);
         }
     }
 

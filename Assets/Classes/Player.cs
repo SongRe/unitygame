@@ -26,5 +26,10 @@ public class Player : CombatEntity
         return ("test1");
     }
 
+    public void Attack(ref CombatEntity defender)
+    {
+
+    }
+
 // Update is called once per frame
 }

@@ -23,7 +23,7 @@ public interface CombatEntity
     abstract void AddModifier(Modifier modifier);
     abstract void RemoveModifier(Modifier modifier);
 
-    abstract void Attack(CombatEntity defender);
+    abstract void Attack(ref CombatEntity defender);
 
     abstract string ToString();
 }
