@@ -24,8 +24,6 @@ public class PillarAbilityScript : MonoBehaviour, AbilityScript
     }
     public void Fire(Vector3 dir, Vector3 hitPos, ref CombatEntity instantiator)
     {
-        print("pillar ability script fire");
-        print(instantiator);
         _instantiator = instantiator;
         //ability.Fire(dir, hitPos);
         SummonPillar(hitPos);

@@ -93,10 +93,11 @@ public class PlayerAbilitiesController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        BasicMissile basicMissileScript = other.GetComponent<BasicMissile>();
-        if (basicMissileScript != null)
+        CombatScript otherAbility = other.GetComponent<CombatScript>();
+        //BasicMissile basicMissileScript = other.GetComponent<BasicMissile>();
+        if (otherAbility != null)
         {
-            print(basicMissileScript._instantiator);
+            print(otherAbility._instantiator);
         }
     }
 

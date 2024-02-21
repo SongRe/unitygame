@@ -23,14 +23,10 @@ public interface CombatEntity
     abstract void AddModifier(Modifier modifier);
     abstract void RemoveModifier(Modifier modifier);
 
+    abstract void Attack(CombatEntity defender);
+
     abstract string ToString();
 }
-
-public interface AttackLogic
-{
-    void OnAttack(CombatEntity attacker, CombatEntity defender);
-}
-
 
 public interface Ability 
 {
@@ -50,7 +46,8 @@ public interface CombatScript
 {
     CombatEntity _instantiator { get; }
 
-    void setInstantiator(ref CombatEntity);
+    void setInstantiator(ref CombatEntity c);
+
 
 }
 
