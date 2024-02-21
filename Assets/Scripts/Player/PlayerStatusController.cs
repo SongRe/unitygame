@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class PlayerStatusController : MonoBehaviour
 {
+    private CombatEntity _player;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        _player = new Player();
+    }
+
     void Start()
     {
         
@@ -14,5 +21,10 @@ public class PlayerStatusController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public ref CombatEntity getPlayer()
+    {
+        return ref _player;
     }
 }

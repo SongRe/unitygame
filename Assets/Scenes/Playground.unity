@@ -1253,6 +1253,18 @@ MonoBehaviour:
   tempProjectile: {fileID: 2442467916213707565, guid: c6869a28e29c26c40a119f90f03b79a8, type: 3}
   Missile: {fileID: 3503398688207284937, guid: 38c1dd05a7d8730499aa0ff4e2c5ec69, type: 3}
   AbilityOne: {fileID: 6907011690483819304, guid: f7957e82d410cbd439fdb370008bb3ac, type: 3}
+--- !u!114 &1762682272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998051737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449b47f514335bc41bc0a8ffa6370c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1764214107
 GameObject:
   m_ObjectHideFlags: 0

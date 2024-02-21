@@ -20,8 +20,10 @@ public interface CombatEntity
     Stats BaseStats { get; }
     Stats ModifiedStats { get; }
 
-    void AddModifier(Modifier modifier);
-    void RemoveModifier(Modifier modifier);
+    abstract void AddModifier(Modifier modifier);
+    abstract void RemoveModifier(Modifier modifier);
+
+    abstract string ToString();
 }
 
 public interface AttackLogic
@@ -36,6 +38,20 @@ public interface Ability
     void Fire(Vector3 dir, Vector3 pos);
 
     // Should return the indicator
+}
+
+public interface AbilityScript
+{
+    public void Fire(Vector3 dir, Vector3 hitPos, ref CombatEntity instantiator);
+    public GameObject GetIndicator();
+}
+
+public interface CombatScript
+{
+    CombatEntity _instantiator { get; }
+
+    void setInstantiator(ref CombatEntity);
+
 }
 
 public interface AbilityModifier

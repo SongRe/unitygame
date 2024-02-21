@@ -21,5 +21,10 @@ public class Player : CombatEntity
         throw new System.NotImplementedException();
     }
 
+    public override string ToString()
+    {
+        return ("test1");
+    }
+
 // Update is called once per frame
 }

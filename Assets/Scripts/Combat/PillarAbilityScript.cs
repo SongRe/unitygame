@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PillarAbilityScript : MonoBehaviour
+public class PillarAbilityScript : MonoBehaviour, AbilityScript
 {
     public GameObject Indicator;
     public GameObject Pillar;
+
+    private Ability ability;
+    private CombatEntity _instantiator;
 
 
 
@@ -19,8 +22,11 @@ public class PillarAbilityScript : MonoBehaviour
     {   
         
     }
-    public void Fire(Vector3 dir, Vector3 hitPos)
+    public void Fire(Vector3 dir, Vector3 hitPos, ref CombatEntity instantiator)
     {
+        print("pillar ability script fire");
+        print(instantiator);
+        _instantiator = instantiator;
         //ability.Fire(dir, hitPos);
         SummonPillar(hitPos);
     }
@@ -30,6 +36,7 @@ public class PillarAbilityScript : MonoBehaviour
     {
         GameObject pillar = Instantiate(Pillar, hitPos, Quaternion.identity);
         pillar.GetComponent<BasicMissile>().Fire(Vector3.up);
+        pillar.GetComponent<BasicMissile>().setInstantiator(ref _instantiator);
     }
 
    

@@ -45,6 +45,7 @@ public class PlayerAbilitiesController : MonoBehaviour
     private PlayerConstants.ABILITY_STATE _abilityState;
     private bool _isFocused = false;
     private GameObject _currentIndicator;
+    private CombatEntity _player;
 
 
     // Ability scripts
@@ -66,6 +67,7 @@ public class PlayerAbilitiesController : MonoBehaviour
         {
             AbilityOne = Instantiate(AbilityOne);
         }
+        
     }
     // Start is called before the first frame update
     void Start()
@@ -73,6 +75,11 @@ public class PlayerAbilitiesController : MonoBehaviour
         _input = GetComponent<StarterAssets.Inputs>();
         _playerInput = GetComponent<PlayerInput>();
         _abilityState = PlayerConstants.ABILITY_STATE.NONE;
+
+        if (_player == null)
+        {
+            _player = GetComponent<PlayerStatusController>().getPlayer();
+        }
     }
 
     // Update is called once per frame
@@ -86,8 +93,11 @@ public class PlayerAbilitiesController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        print("player trigger");
-        print(other.GetType());
+        BasicMissile basicMissileScript = other.GetComponent<BasicMissile>();
+        if (basicMissileScript != null)
+        {
+            print(basicMissileScript._instantiator);
+        }
     }
 
 
@@ -95,11 +105,11 @@ public class PlayerAbilitiesController : MonoBehaviour
     // Public method to be called by input system
     public void OnFire()
     {
-        _onFire();
+        _onFireInternal();
     }
 
 
-    private void _onFire()
+    private void _onFireInternal()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 direction = new Vector3();
@@ -120,7 +130,7 @@ public class PlayerAbilitiesController : MonoBehaviour
             case PlayerConstants.ABILITY_STATE.ABILITY_1:
                 if (hasHit)
                 {
-                    AbilityOne.GetComponent<PillarAbilityScript>().Fire(Vector3.up, hitPos);
+                    AbilityOne.GetComponent<PillarAbilityScript>().Fire(Vector3.up, hitPos, ref _player);
                     toggleCamera();
                 }
 
@@ -130,6 +140,7 @@ public class PlayerAbilitiesController : MonoBehaviour
                 {
                     GameObject missile = Instantiate(Missile, transform.position, Quaternion.identity);
                     missile.GetComponent<BasicMissile>().Fire(direction);
+                    missile.GetComponent<BasicMissile>().setInstantiator(ref _player);
                 }
                 break;
         }
