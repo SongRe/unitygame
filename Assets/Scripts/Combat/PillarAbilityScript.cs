@@ -7,7 +7,7 @@ public class PillarAbilityScript : MonoBehaviour, AbilityScript
     public GameObject Indicator;
     public GameObject Pillar;
 
-    private Ability ability;
+    private Ability _ability;
     private CombatEntity _instantiator;
 
 
@@ -15,6 +15,7 @@ public class PillarAbilityScript : MonoBehaviour, AbilityScript
     // Start is called before the first frame update
     void Start()
     {
+        // TODO: Create PillarAbility class 
     }
 
     // Update is called once per frame  
@@ -33,8 +34,10 @@ public class PillarAbilityScript : MonoBehaviour, AbilityScript
     private void SummonPillar(Vector3 hitPos)
     {
         GameObject pillar = Instantiate(Pillar, hitPos, Quaternion.identity);
-        pillar.GetComponent<BasicMissile>().Fire(Vector3.up);
-        pillar.GetComponent<BasicMissile>().setInstantiator(ref _instantiator);
+        ProjectileCombatScript combatScript = pillar.GetComponent<ProjectileCombatScript>();
+        combatScript.setInstantiator(ref _instantiator);
+        combatScript.setAbility(ref _ability);
+        combatScript.Fire(Vector3.up);
     }
 
    
