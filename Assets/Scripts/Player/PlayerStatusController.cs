@@ -27,4 +27,16 @@ public class PlayerStatusController : MonoBehaviour
     {
         return ref _player;
     }
+
+
+    public void OnTriggerEnter(Collider other)
+    {
+        ProjectileCombatScript otherAbility = other.GetComponent<ProjectileCombatScript>();
+        //BasicMissile basicMissileScript = other.GetComponent<BasicMissile>();
+        if (otherAbility != null)
+        {
+            CombatEntity attacker = otherAbility._instantiator;
+            attacker.Attack(ref _player);
+        }
+    }
 }

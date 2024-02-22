@@ -35,6 +35,9 @@ public class BasicMissile : MonoBehaviour, ProjectileCombatScript
     public void setAbility(ref Ability a)
     {
         ability = a;
+        // Apply Ability Stats here
+
+
     }
 
     void Start()
@@ -51,8 +54,21 @@ public class BasicMissile : MonoBehaviour, ProjectileCombatScript
 
     public void Fire(Vector3 dir)
     {
+        if (ability != null) {
+            AbilityStats stats = ability.getAbilityStats();
+            transform.localScale = new Vector3(stats.xScaling, stats.yScaling, stats.zScaling);
+            force = stats.Speed;
+        }
+
+        
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.AddForce(dir * force, ForceMode.Impulse);
+    }
+
+
+    public void OnHit(GameObject target)
+    {
+
     }
 
 }

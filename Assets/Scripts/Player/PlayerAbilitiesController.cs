@@ -91,16 +91,7 @@ public class PlayerAbilitiesController : MonoBehaviour
 
 
 
-    public void OnTriggerEnter(Collider other)
-    {
-        ProjectileCombatScript otherAbility = other.GetComponent<ProjectileCombatScript>();
-        //BasicMissile basicMissileScript = other.GetComponent<BasicMissile>();
-        if (otherAbility != null)
-        {
-            CombatEntity attacker = otherAbility._instantiator;
-            attacker.Attack(ref _player);
-        }
-    }
+   
 
 
 
@@ -132,7 +123,11 @@ public class PlayerAbilitiesController : MonoBehaviour
             case PlayerConstants.ABILITY_STATE.ABILITY_1:
                 if (hasHit)
                 {
-                    AbilityOne.GetComponent<PillarAbilityScript>().Fire(Vector3.up, hitPos, ref _player);
+                    AbilityScript abilityScript = AbilityOne.GetComponent<AbilityScript>();
+                    print(abilityScript);
+                    abilityScript.Initialize();
+                    abilityScript.setAbilityStat(AbilityStat.X_SCALING, 2.0f);
+                    abilityScript.Fire(Vector3.up, hitPos, ref _player);
                     toggleCamera();
                 }
 

@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Indicator: {fileID: 8711869275732053081, guid: 5b8ab265c6fc99f4babb65e70ea577c4, type: 3}
-  Pillar: {fileID: 4254486884442460962, guid: d2803abec17ebbd468b51ed2218a48e5, type: 3}
+  Projectile: {fileID: 4254486884442460962, guid: d2803abec17ebbd468b51ed2218a48e5, type: 3}

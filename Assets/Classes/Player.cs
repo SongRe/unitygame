@@ -11,15 +11,17 @@ public class Player : CombatEntity
 
     public Stats ModifiedStats => throw new System.NotImplementedException();
 
-    public void AddModifier(Modifier modifier)
+    public void AddModifier(OnHitModifier modifier)
     {
         throw new System.NotImplementedException();
     }
 
-    public void RemoveModifier(Modifier modifier)
-    {
-        throw new System.NotImplementedException();
-    }
+
+
+    //public void RemoveModifier(AbilityModifier modifier)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 
     public override string ToString()
     {
@@ -28,7 +30,7 @@ public class Player : CombatEntity
 
     public void Attack(ref CombatEntity defender)
     {
-
+        Debug.Log(ToString() + "attacking: " + ToString());
     }
 
 // Update is called once per frame
