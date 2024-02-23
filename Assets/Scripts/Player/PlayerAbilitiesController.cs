@@ -20,6 +20,7 @@ public class PlayerAbilitiesController : MonoBehaviour
 
     // Abilities
     public GameObject AbilityOne;
+    public GameObject BasicAbility;
 
 
 
@@ -90,11 +91,6 @@ public class PlayerAbilitiesController : MonoBehaviour
     }
 
 
-
-   
-
-
-
     // Public method to be called by input system
     public void OnFire()
     {
@@ -124,7 +120,6 @@ public class PlayerAbilitiesController : MonoBehaviour
                 if (hasHit)
                 {
                     AbilityScript abilityScript = AbilityOne.GetComponent<AbilityScript>();
-                    print(abilityScript);
                     abilityScript.Initialize();
                     abilityScript.setAbilityStat(AbilityStat.X_SCALING, 2.0f);
                     abilityScript.Fire(Vector3.up, hitPos, ref _player);
@@ -135,9 +130,9 @@ public class PlayerAbilitiesController : MonoBehaviour
             case PlayerConstants.ABILITY_STATE.NONE:
                 if (hasHit)
                 {
-                    GameObject missile = Instantiate(Missile, transform.position, Quaternion.identity);
-                    missile.GetComponent<BasicMissile>().Fire(direction);
-                    missile.GetComponent<BasicMissile>().setInstantiator(ref _player);
+                    AbilityScript abilityScript = BasicAbility.GetComponent<AbilityScript>();
+                    abilityScript.Initialize();
+                    abilityScript.Fire(direction, transform.position, ref _player);
                 }
                 break;
         }

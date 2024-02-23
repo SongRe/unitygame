@@ -68,7 +68,7 @@ public class BasicMissile : MonoBehaviour, ProjectileCombatScript
 
     public void OnHit(GameObject target)
     {
-
+        print("ability: " + ability + " detected a hit on: " + target.ToString());
     }
 
 }

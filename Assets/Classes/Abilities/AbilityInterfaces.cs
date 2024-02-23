@@ -86,6 +86,13 @@ public interface AbilityScript
     /// </summary>
     public void Initialize();
 
+
+    /// <summary>
+    /// This method should summon the private Projectile GameObject in this script. 
+    /// </summary>
+    /// <param name="dir">The direction to fire the object</param>
+    /// <param name="hitPos">The position to instantiate it at</param>
+    /// <param name="instantiator">Who summoned the object</param>
     public void Fire(Vector3 dir, Vector3 hitPos, ref CombatEntity instantiator);
     public GameObject GetIndicator();
 
