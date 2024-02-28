@@ -3,35 +3,66 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : CombatEntity
-{ 
-    // Start is called before the first frame update
-    public float Health { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+{
+    private List<Observer> observers;
 
-    public Stats BaseStats => throw new System.NotImplementedException();
-
-    public Stats ModifiedStats => throw new System.NotImplementedException();
-
-    public void AddModifier(OnHitModifier modifier)
+    public Player()
     {
-        throw new System.NotImplementedException();
+        observers = new List<Observer>();
+        BaseStats = new Stats();
+        BaseStats.MaxHealth = 10;
+        BaseStats.Attack = 5.0f;
+        BaseStats.Speed = 5.0f;
+        BaseStats.Defense = 5.0f;
+        Health = BaseStats.MaxHealth;
     }
-
-
-
-    //public void RemoveModifier(AbilityModifier modifier)
-    //{
-    //    throw new System.NotImplementedException();
-    //}
 
     public override string ToString()
     {
-        return ("test1");
+        return ("Player");
     }
 
-    public void Attack(ref CombatEntity defender)
+    public override Stats getStats()
     {
-        Debug.Log(ToString() + "attacking: " + ToString());
+        return BaseStats;
     }
 
-// Update is called once per frame
+    public override void AddModifier(StatModifier modifier)
+    {
+        BaseStats = modifier.applyModifier(BaseStats);
+    }
+
+    public override void Attacked(ref CombatEntity attacker)
+    {
+        Debug.Log(ToString() + " attacked by: " + attacker);
+    }
+
+    public override void OnKill(ref CombatEntity killed_entity)
+    {
+        Debug.Log(ToString() + " killed: " + killed_entity);
+    }
+
+    public override void addObserver(Observer observer)
+    {
+        observers.Add(observer);
+    }
+
+    public override void removeObserver(Observer observer)
+    {
+        observers.Remove(observer);
+    }
+
+    public override void notifyObservers(string message)
+    {
+        observers.ForEach(observer => observer.update(message));
+    }
+
+
+    private void levelUp()
+    {
+        AddModifier(new LevelUpModifier());
+        notifyObservers(PlayerConstants.OBSERVER_MESSAGE.STATS_UPDATE); 
+    }
+
+    // Update is called once per frame
 }

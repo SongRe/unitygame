@@ -20,7 +20,7 @@ public struct AbilityStats
     public float cooldown;
 
     /// <summary>
-    /// 
+    /// Constructor
     /// </summary>
     /// <param name="s">Speed</param>
     /// <param name="x">xScaling</param>

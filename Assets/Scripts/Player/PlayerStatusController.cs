@@ -37,7 +37,7 @@ public class PlayerStatusController : MonoBehaviour
         {
             otherAbility.OnHit(gameObject);
             CombatEntity attacker = otherAbility._instantiator;
-            attacker.Attack(ref _player);
+            _player.Attacked(ref attacker);
 
         }
     }

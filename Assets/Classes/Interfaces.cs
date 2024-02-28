@@ -6,23 +6,50 @@ public struct Stats
 {
     public float Attack;
     public float Defense;
-    public float Health;
+    public float MaxHealth;
+    public float Speed;
 }
 
 
-
-public interface CombatEntity
+public interface StatModifier
 {
-    float Health { get; set; }
-    Stats BaseStats { get; }
-    Stats ModifiedStats { get; }
+    public static float INFINITE_LIFETIME = -1;
+    abstract Stats applyModifier(Stats s);
 
-    //abstract void AddModifier(AbilityModifier modifier);
-    //abstract void RemoveModifier(modifier);
+    virtual float lifeTime()
+    {
+        return INFINITE_LIFETIME;
+    }
+}
 
-    abstract void Attack(ref CombatEntity defender);
+public abstract class CombatEntity : Subject
+{
+    public float xp_value;
+    protected float Health;
+    protected Stats BaseStats;
 
-    abstract string ToString();
+    public abstract Stats getStats();
+
+    public abstract void AddModifier(StatModifier modifier);
+
+
+
+    /// <summary>
+    /// Called by the attacker 
+    /// </summary>
+    /// <param name="attacker"></param>
+    public abstract void Attacked(ref CombatEntity attacker);
+
+    /// <summary>
+    ///  Called by the attacked entity when it dies 
+    /// </summary>
+    /// <param name="killed_entity"></param>
+    public abstract void OnKill(ref CombatEntity killed_entity);
+
+    public abstract override string ToString();
+    public abstract void addObserver(Observer observer);
+    public abstract void removeObserver(Observer observer);
+    public abstract void notifyObservers(string message);
 }
 
 
@@ -60,3 +87,15 @@ public interface ProjectileCombatScript
 }
 
 
+public interface Subject
+{
+    void addObserver(Observer observer);
+    void removeObserver(Observer observer);
+    void notifyObservers(string message);
+}
+
+// Define the observer interface
+public interface Observer
+{
+    void update(string message);
+}

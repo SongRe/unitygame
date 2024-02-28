@@ -12,7 +12,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : MonoBehaviour
+    public class ThirdPersonController : MonoBehaviour, Observer
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -110,6 +110,8 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
+        private CombatEntity _player;
+
         private bool IsCurrentDeviceMouse
         {
             get
@@ -141,6 +143,7 @@ namespace StarterAssets
             _input = GetComponent<Inputs>();
 #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
+            _player = GetComponent<PlayerStatusController>().getPlayer();
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
@@ -389,5 +392,15 @@ namespace StarterAssets
             }
         }
 
+        void Observer.update(string message)
+        {
+            if (message == PlayerConstants.OBSERVER_MESSAGE.STATS_UPDATE)
+            {
+
+            } else
+            {
+
+            }
+        }
     }
 }
