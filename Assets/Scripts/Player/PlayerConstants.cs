@@ -15,5 +15,7 @@ public static class PlayerConstants
     public static class OBSERVER_MESSAGE
     {
         public static string STATS_UPDATE = "stats_update";
+
+        public static string HEALTH_UPDATE = "health_update";
     }
 }

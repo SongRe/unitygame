@@ -33,7 +33,8 @@ public class PlayerStatusController : MonoBehaviour
     {
         ProjectileCombatScript otherAbility = other.GetComponent<ProjectileCombatScript>();
         //BasicMissile basicMissileScript = other.GetComponent<BasicMissile>();
-        if (otherAbility != null)
+        
+        if (otherAbility != null && otherAbility._instantiator != _player)
         {
             otherAbility.OnHit(gameObject);
             CombatEntity attacker = otherAbility._instantiator;

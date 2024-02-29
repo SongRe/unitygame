@@ -15,7 +15,6 @@ public class PlayerAbilitiesController : MonoBehaviour
     public float maxDistance = 5.0f;
     public GameObject CameraController;
     public GameObject tempProjectile;
-    public GameObject Missile;
 
 
     // Abilities
@@ -95,6 +94,11 @@ public class PlayerAbilitiesController : MonoBehaviour
     public void OnFire()
     {
         _onFireInternal();
+    }
+
+    public void OnForceLevelUp()
+    {
+        _player.AddModifier(new LevelUpModifier());
     }
 
 

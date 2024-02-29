@@ -20,7 +20,7 @@ public class FireballAbilityScript : MonoBehaviour, AbilityScript
     {
         _ability.AddModifier(a);
     }
-
+    
     public void Fire(Vector3 dir, Vector3 hitPos, ref CombatEntity instantiator)
     {
         _instantiator = instantiator;

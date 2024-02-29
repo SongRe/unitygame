@@ -14,7 +14,7 @@ public struct Stats
 public interface StatModifier
 {
     public static float INFINITE_LIFETIME = -1;
-    abstract Stats applyModifier(Stats s);
+    abstract Stats applyModifier(Stats s, ref float health);
 
     virtual float lifeTime()
     {
@@ -30,9 +30,8 @@ public abstract class CombatEntity : Subject
 
     public abstract Stats getStats();
 
+    public abstract float getHealth();
     public abstract void AddModifier(StatModifier modifier);
-
-
 
     /// <summary>
     /// Called by the attacker 

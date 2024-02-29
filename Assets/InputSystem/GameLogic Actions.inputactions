@@ -1,0 +1,56 @@
+{
+    "name": "GameLogic Actions",
+    "maps": [
+        {
+            "name": "Testing",
+            "id": "a91b5a1a-00be-4fc0-b571-ef4461c502c2",
+            "actions": [
+                {
+                    "name": "ForceLevelUp",
+                    "type": "Button",
+                    "id": "85a54e87-41bd-424a-8b74-825d081e505a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "79859f58-73fc-4625-9946-33e90e2d9a6b",
+                    "path": "=",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ForceLevelUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "63b9f1d4-b59f-403d-8bee-63f859239e76",
+                    "path": "+",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ForceLevelUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd615565-5b75-4d40-b946-ffb92235c7d5",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ForceLevelUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
