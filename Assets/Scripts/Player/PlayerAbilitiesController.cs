@@ -177,11 +177,10 @@ public class PlayerAbilitiesController : MonoBehaviour
                         if (_currentIndicator == null)
                         {
                             Vector3 hitPos = hit.point;
-                            hitPos.y = 0.5f;
                             _currentIndicator = Instantiate(AbilityOne.GetComponent<PillarAbilityScript>().GetIndicator(), hitPos, Quaternion.identity);
                         } else
                         {
-                            _currentIndicator.transform.position = new Vector3(hit.point.x, 0.05f, hit.point.z);
+                            _currentIndicator.transform.position = new Vector3(hit.point.x, hit.point.y + 0.1f, hit.point.z);
                         }
                     }
                 }
