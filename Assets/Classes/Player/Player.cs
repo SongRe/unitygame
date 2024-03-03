@@ -79,6 +79,7 @@ public class Player : CombatEntity
 
     private void levelUp()
     {
+        _level += 1;
         AddModifier(new LevelUpModifier());
         notifyObservers(PlayerConstants.OBSERVER_MESSAGE.STATS_UPDATE); 
     }

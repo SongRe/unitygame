@@ -52,7 +52,10 @@ public abstract class CombatEntity : Subject
 }
 
 
-
+public interface EnemyCombatantScript
+{
+    CombatEntity getCombatEntity();
+}
 
 
 

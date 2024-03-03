@@ -12,6 +12,7 @@ TagManager:
   - CameraController
   - Indicator
   - Projectile
+  - Enemy
   layers:
   - Default
   - TransparentFX

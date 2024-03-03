@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface TAGS
 {
-    public static string Player = "Player";
+    public const string Player = "Player";
+    public const string Projectile = "Projectile";
+    public const string Enemy = "Enemy";
 }

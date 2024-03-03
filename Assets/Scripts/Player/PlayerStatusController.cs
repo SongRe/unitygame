@@ -31,15 +31,29 @@ public class PlayerStatusController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        ProjectileCombatScript otherAbility = other.GetComponent<ProjectileCombatScript>();
-        //BasicMissile basicMissileScript = other.GetComponent<BasicMissile>();
-        
-        if (otherAbility != null && otherAbility._instantiator != _player)
+        switch(other.gameObject.tag)
         {
-            otherAbility.OnHit(gameObject);
-            CombatEntity attacker = otherAbility._instantiator;
-            _player.Attacked(ref attacker);
+            case TAGS.Player:
+                break;
+            case TAGS.Enemy:
+                print("Detected collision with enemy object");
+                break;
+            case TAGS.Projectile:
+                ProjectileCombatScript otherAbility = other.GetComponent<ProjectileCombatScript>();
+                //BasicMissile basicMissileScript = other.GetComponent<BasicMissile>();
+                if (otherAbility != null && otherAbility._instantiator != _player)
+                {
+                    otherAbility.OnHit(gameObject);
+                    CombatEntity attacker = otherAbility._instantiator;
+                    _player.Attacked(ref attacker);
+
+                } else
+                {
+                    print("Error: Collision detected with projectile but no projectile script or no instantiator");
+                }
+                break;
 
         }
+        
     }
 }
