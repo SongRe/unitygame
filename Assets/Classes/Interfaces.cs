@@ -8,6 +8,11 @@ public struct Stats
     public float Defense;
     public float MaxHealth;
     public float Speed;
+
+    public Stats(float A, float D, float H, float S)
+    {
+        Attack = A; Defense = D; MaxHealth = H; Speed = S;
+    }
 }
 
 

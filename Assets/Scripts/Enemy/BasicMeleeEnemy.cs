@@ -9,7 +9,7 @@ public class BasicMeleeEnemy : MonoBehaviour, EnemyCombatantScript
     public float speed = 2.0f;
     public float y_offset = 1.0f; // how high off the ground we should be
 
-    private CombatEntity _meleeEnemy;
+    private CombatEntity self = new BasicMeleeEnemyClass();
 
     private float _raycastPollingTime = TechnicalConstants.RAYCASTING.POLLING_RATE;
     private float _y_level = 0.0f;
@@ -17,7 +17,7 @@ public class BasicMeleeEnemy : MonoBehaviour, EnemyCombatantScript
 
     public CombatEntity getCombatEntity()
     {
-        return _meleeEnemy;
+        return self;
     }
     // Start is called before the first frame update
     void Start()
@@ -84,7 +84,7 @@ public class BasicMeleeEnemy : MonoBehaviour, EnemyCombatantScript
             Vector3 directionToPlayer = playerPos - transform.position;
             directionToPlayer.y = _y_level - transform.position.y;
             directionToPlayer.Normalize();
-            transform.Translate(directionToPlayer * speed * Time.deltaTime);
+            transform.Translate(directionToPlayer * self.getStats().Speed * Time.deltaTime);
         }
     }
 

@@ -37,10 +37,10 @@ public class PlayerStatusController : MonoBehaviour
                 break;
             case TAGS.Enemy:
                 print("Detected collision with enemy object");
+                EnemyCombatantScript enemyCombatantScript = other.GetComponent<EnemyCombatantScript>();
                 break;
             case TAGS.Projectile:
                 ProjectileCombatScript otherAbility = other.GetComponent<ProjectileCombatScript>();
-                //BasicMissile basicMissileScript = other.GetComponent<BasicMissile>();
                 if (otherAbility != null && otherAbility._instantiator != _player)
                 {
                     otherAbility.OnHit(gameObject);
