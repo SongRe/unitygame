@@ -33,7 +33,7 @@ public class PillarAbilityScript : MonoBehaviour, AbilityScript
     public void Fire(Vector3 dir, Vector3 hitPos, ref CombatEntity instantiator)
     {
         _instantiator = instantiator;
-        //ability.Fire(dir, hitPos);
+        _ability.setAttackValue(instantiator.getStats().Attack * 1.2f);
         SummonPillar(hitPos);
     }
    

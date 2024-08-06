@@ -856,7 +856,7 @@ GameObject:
   - component: {fileID: 1280011940}
   - component: {fileID: 1280011939}
   - component: {fileID: 1280011944}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BasicMeleeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

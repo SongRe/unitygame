@@ -24,6 +24,8 @@ public class FireballAbilityScript : MonoBehaviour, AbilityScript
     public void Fire(Vector3 dir, Vector3 hitPos, ref CombatEntity instantiator)
     {
         _instantiator = instantiator;
+        _ability.setAttackValue(_instantiator.getStats().Attack);
+
         GameObject fireball = Instantiate(Projectile, hitPos, Quaternion.identity);
         ProjectileCombatScript projectileCombatScript = fireball.GetComponent<ProjectileCombatScript>();
         if (projectileCombatScript != null)

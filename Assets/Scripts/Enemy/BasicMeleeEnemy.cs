@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
-public class BasicMeleeEnemy : MonoBehaviour, EnemyCombatantScript
+public class BasicMeleeEnemy : MonoBehaviour, EnemyCombatantScript, Observer
 {
     public GameObject player; // To track towards
     public LayerMask terrainLayermask;
@@ -12,7 +13,6 @@ public class BasicMeleeEnemy : MonoBehaviour, EnemyCombatantScript
     private CombatEntity self = new BasicMeleeEnemyClass();
 
     private float _raycastPollingTime = TechnicalConstants.RAYCASTING.POLLING_RATE;
-    private float _y_level = 0.0f;
     private Rigidbody _rb;
 
     public CombatEntity getCombatEntity()
@@ -30,7 +30,7 @@ public class BasicMeleeEnemy : MonoBehaviour, EnemyCombatantScript
         {
             _rb = gameObject.GetComponent<Rigidbody>();
         }
-        updateYLevel();
+        self.addObserver(this);
 
     }
 
@@ -40,7 +40,6 @@ public class BasicMeleeEnemy : MonoBehaviour, EnemyCombatantScript
         _raycastPollingTime -= Time.deltaTime;
         if (_raycastPollingTime <= 0)
         {
-            updateYLevel();
             _raycastPollingTime = TechnicalConstants.RAYCASTING.POLLING_RATE;
         }
     }
@@ -50,6 +49,18 @@ public class BasicMeleeEnemy : MonoBehaviour, EnemyCombatantScript
         switch (other.gameObject.tag)
         {
             case TAGS.Player:
+                break;
+            case TAGS.Projectile:
+                print("Basic Melee Enemy Attacked By Projectile");
+                ProjectileCombatScript projectile = other.GetComponent<ProjectileCombatScript>();
+                if (projectile != null)
+                {
+                    Ability ability = projectile.ability;
+                    CombatEntity attacker = projectile._instantiator;
+                    CombatHelper.battle(ref attacker, ability, ref self);
+                }
+
+
                 break;
         }
     }
@@ -67,24 +78,24 @@ public class BasicMeleeEnemy : MonoBehaviour, EnemyCombatantScript
         moveTowardsPlayer();
     }
 
-    private void updateYLevel()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, terrainLayermask))
-        {
-            _y_level = hit.point.y + y_offset;
-        }
-    }
-
     private void moveTowardsPlayer()
     {
         if (player != null)
         {
             Vector3 playerPos = player.transform.position;
+            playerPos.y += 1;
             Vector3 directionToPlayer = playerPos - transform.position;
-            directionToPlayer.y = _y_level - transform.position.y;
+            //directionToPlayer.y = playerPos.y;
             directionToPlayer.Normalize();
             transform.Translate(directionToPlayer * self.getStats().Speed * Time.deltaTime);
+        }
+    }
+
+    void Observer.update(string message)
+    {
+        if (message == EnemyConstants.OBSERVER_MESSAGE.ENEMY_DEATH)
+        {
+            Destroy(gameObject);
         }
     }
 

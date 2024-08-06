@@ -22,33 +22,8 @@ public class FireballAbility : Ability
         abilitySummonModifiers.Add(a);
     }
 
-    public override AbilityStats getAbilityStats()
+    public override string ToString()
     {
-        return new AbilityStats(abilityStats.Speed, abilityStats.xScaling, abilityStats.yScaling, abilityStats.zScaling, abilityStats.cooldown);
-    }
-
-    public override void setCooldown(float cd)
-    {
-        abilityStats.cooldown = cd;
-    }
-
-    public override void setSpeed(float s)
-    {
-        abilityStats.Speed = s;
-    }
-
-    public override void setXScaling(float x)
-    {
-        abilityStats.xScaling = x;
-    }
-
-    public override void setYScaling(float y)
-    {
-        abilityStats.yScaling = y;
-    }
-
-    public override void setZScaling(float z)
-    {
-        abilityStats.zScaling = z;
+        return "Fireball Ability";
     }
 }

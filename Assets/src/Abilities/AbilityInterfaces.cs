@@ -18,6 +18,7 @@ public struct AbilityStats
     public float yScaling;
     public float zScaling;
     public float cooldown;
+    public float attackValue;
 
     /// <summary>
     /// Constructor
@@ -27,13 +28,15 @@ public struct AbilityStats
     /// <param name="y">yScaling</param>
     /// <param name="z">zScaling</param>
     /// <param name="cd">Cooldown</param>
-    public AbilityStats(float s, float x, float y, float z, float cd)
+    /// <param name="av">Attack Value</param>
+    public AbilityStats(float s, float x, float y, float z, float cd, float av)
     {
         Speed = s;
         xScaling = x;
         yScaling = y;
         zScaling = z;
         cooldown = cd;
+        attackValue = av;
     }
 }
 
@@ -59,18 +62,41 @@ public abstract class Ability
     public abstract void AddModifier(OnHitModifier modifier);
     public abstract void AddModifier(AbilitySummonModifier a);
 
-    public abstract void setXScaling(float x);
-    public abstract void setYScaling(float y);
-    public abstract void setZScaling(float z);
-    public abstract void setSpeed(float s);
-    public abstract void setCooldown(float cd);
+    public virtual void setXScaling(float x)
+    {
+        abilityStats.xScaling = x;
+    }
+    public virtual void setYScaling(float y)
+    {
+        abilityStats.yScaling = y;
+    }
+    public virtual void setZScaling(float z)
+    {
+        abilityStats.zScaling = z;
+    }
+    public virtual void setSpeed(float s)
+    {
+        abilityStats.Speed = s;
+    }
+    public virtual void setCooldown(float cd)
+    {
+        abilityStats.cooldown = cd;
+    }
+
+    public virtual void setAttackValue(float av)
+    {
+        abilityStats.attackValue = av;
+    }
 
 
     /// <summary>
     /// Gets a copy of the ability's stats (read only)
     /// </summary>
     /// <returns>The abiility's associated stats</returns>
-    public abstract AbilityStats getAbilityStats();
+    public virtual AbilityStats getAbilityStats()
+    {
+        return abilityStats;
+    }
 
 
 }

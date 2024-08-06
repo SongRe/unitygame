@@ -64,7 +64,7 @@ public interface ProjectileCombatScript
     /// Should be called when a GameObject is hit by an object carrying this script, 
     /// should call ability.getOnHitModifers() and iterate through the modifiers to determine what to do
     /// </summary>
-    /// <param name="target"></param>
+    /// <param name="target">The target that was hit</param>
     void OnHit(GameObject target);
 
 }

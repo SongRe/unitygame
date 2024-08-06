@@ -114,7 +114,7 @@ public class PlayerAbilitiesController : MonoBehaviour
             hitPos = hit.point;
             direction = (hitPos - playerPos).normalized;
             hasHit = true;
-            Instantiate(tempProjectile, hit.point, Quaternion.identity); // helper indicator
+            //Instantiate(tempProjectile, hit.point, Quaternion.identity); // helper indicator
         }
 
         switch (_abilityState)

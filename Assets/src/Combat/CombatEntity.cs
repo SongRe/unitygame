@@ -25,16 +25,21 @@ public abstract class CombatEntity : Subject
     public abstract void AddModifier(StatModifier modifier);
 
     /// <summary>
-    /// Called by the attacker 
+    /// Handle getting attacked.
     /// </summary>
     /// <param name="attacker"></param>
     public abstract void Attacked(ref CombatEntity attacker);
+    /// <summary>
+    /// Handle getting attacked by an ability
+    /// </summary>
+    /// <param name="ability"></param>
+    public abstract void Attacked(Ability ability, ref CombatEntity attacker);
 
     /// <summary>
     ///  Called by the attacked entity when it dies 
     /// </summary>
     /// <param name="killed_entity"></param>
-    public abstract void OnKill(ref CombatEntity killed_entity);
+    public abstract void OnKill(CombatEntity killed_entity);
 
     public abstract override string ToString();
     public virtual void addObserver(Observer observer)

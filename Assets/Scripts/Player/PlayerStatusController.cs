@@ -38,6 +38,8 @@ public class PlayerStatusController : MonoBehaviour
             case TAGS.Enemy:
                 print("Detected collision with enemy object");
                 EnemyCombatantScript enemyCombatantScript = other.GetComponent<EnemyCombatantScript>();
+                CombatEntity enemy = enemyCombatantScript.getCombatEntity();
+                CombatHelper.battle(ref enemy, ref _player);
                 break;
             case TAGS.Projectile:
                 ProjectileCombatScript otherAbility = other.GetComponent<ProjectileCombatScript>();
@@ -49,7 +51,7 @@ public class PlayerStatusController : MonoBehaviour
 
                 } else
                 {
-                    print("Error: Collision detected with projectile but no projectile script or no instantiator");
+                    print("Error: Player Collision detected with projectile but no projectile script or no instantiator");
                 }
                 break;
 

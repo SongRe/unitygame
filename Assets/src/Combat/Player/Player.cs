@@ -9,7 +9,7 @@ public class Player : CombatEntity
     private float xp_threshold = 50;
     public Player()
     {
-        BaseStats = new Stats(2, 5.0f, 5.0f, 5.0f);
+        BaseStats = new Stats(2, 1.0f, 5.0f, 5.0f);
         Health = BaseStats.MaxHealth;
     }
 
@@ -37,9 +37,22 @@ public class Player : CombatEntity
     public override void Attacked(ref CombatEntity attacker)
     {
         Debug.Log(ToString() + " attacked by: " + attacker);
+        Stats attackerStats = attacker.getStats();
+        float damage = attackerStats.Attack - BaseStats.Defense * 0.5f;
+
+        if (damage > 0)
+        {
+            Health -= damage;
+            notifyObservers(PlayerConstants.OBSERVER_MESSAGE.HEALTH_UPDATE);
+        }
     }
 
-    public override void OnKill(ref CombatEntity killed_entity)
+    public override void Attacked(Ability ability, ref CombatEntity attacker)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void OnKill(CombatEntity killed_entity)
     {
         Debug.Log(ToString() + " killed: " + killed_entity);
         xp_value += killed_entity.xp_value;
@@ -53,6 +66,7 @@ public class Player : CombatEntity
             xp_value = xp_value % xp_threshold;
             
         }
+        notifyObservers(PlayerConstants.OBSERVER_MESSAGE.STATS_UPDATE);
 
     }
 

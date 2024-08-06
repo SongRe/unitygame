@@ -22,39 +22,6 @@ public class PillarAbility : Ability
         abilitySummonModifiers.Add(a);
     }
 
-    public override AbilityStats getAbilityStats()
-    {
-        return new AbilityStats(abilityStats.Speed, abilityStats.xScaling, abilityStats.yScaling, abilityStats.zScaling, abilityStats.cooldown);
-    }
-
-    public override void setCooldown(float cd)
-    {
-        abilityStats.cooldown = Mathf.Max(0, cd);
-    }
-
-    public override void setSpeed(float s)
-    {
-        abilityStats.Speed = Mathf.Max(0, s);
-    }
-
-    public override void setXScaling(float x)
-    {
-        float diff = x / abilityStats.xScaling;
-        setSpeed(abilityStats.Speed * diff);
-
-        abilityStats.xScaling = Mathf.Max(0, x);
-    }
-
-    public override void setYScaling(float y)
-    {
-        abilityStats.yScaling = Mathf.Max(0, y);
-    }
-
-    public override void setZScaling(float z)
-    {
-        abilityStats.zScaling = Mathf.Max(0, z);
-    }
-
     public override string ToString()
     {
         return "Pillar Ability: \n" +
