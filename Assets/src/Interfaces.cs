@@ -19,44 +19,19 @@ public struct Stats
 public interface StatModifier
 {
     public static float INFINITE_LIFETIME = -1;
-    abstract Stats applyModifier(Stats s, ref float health);
+
+    /// <summary>
+    /// This method should return a new, modified stats object
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    abstract Stats applyModifier(Stats s);
 
     virtual float lifeTime()
     {
         return INFINITE_LIFETIME;
     }
 }
-
-public abstract class CombatEntity : Subject
-{
-    public float xp_value;
-    protected float Health;
-    protected Stats BaseStats;
-
-    public abstract Stats getStats();
-
-    public abstract float getHealth();
-    public abstract void AddModifier(StatModifier modifier);
-
-    /// <summary>
-    /// Called by the attacker 
-    /// </summary>
-    /// <param name="attacker"></param>
-    public abstract void Attacked(ref CombatEntity attacker);
-
-    /// <summary>
-    ///  Called by the attacked entity when it dies 
-    /// </summary>
-    /// <param name="killed_entity"></param>
-    public abstract void OnKill(ref CombatEntity killed_entity);
-
-    public abstract override string ToString();
-    public abstract void addObserver(Observer observer);
-    public abstract void removeObserver(Observer observer);
-    public abstract void notifyObservers(string message);
-}
-
-
 public interface EnemyCombatantScript
 {
     CombatEntity getCombatEntity();
@@ -66,6 +41,7 @@ public interface EnemyCombatantScript
 
 /// <summary>
 /// The script interface for GameObjects that are instantiated and manipulated 
+/// Represent actual game objects that are fired (ex: missiles)
 /// </summary>
 public interface ProjectileCombatScript
 {

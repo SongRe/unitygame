@@ -1,20 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : CombatEntity
 {
-    private List<Observer> observers;
     private int _level = 1;
     private float xp_threshold = 50;
     public Player()
     {
-        observers = new List<Observer>();
-        BaseStats = new Stats();
-        BaseStats.MaxHealth = 10;
-        BaseStats.Attack = 5.0f;
-        BaseStats.Speed = 5.0f;
-        BaseStats.Defense = 5.0f;
+        BaseStats = new Stats(2, 5.0f, 5.0f, 5.0f);
         Health = BaseStats.MaxHealth;
     }
 
@@ -35,7 +30,7 @@ public class Player : CombatEntity
 
     public override void AddModifier(StatModifier modifier)
     {
-        BaseStats = modifier.applyModifier(BaseStats, ref Health);
+        BaseStats = modifier.applyModifier(BaseStats);
         notifyObservers(PlayerConstants.OBSERVER_MESSAGE.STATS_UPDATE);
     }
 
@@ -61,26 +56,11 @@ public class Player : CombatEntity
 
     }
 
-    public override void addObserver(Observer observer)
-    {
-        observers.Add(observer);
-    }
-
-    public override void removeObserver(Observer observer)
-    {
-        observers.Remove(observer);
-    }
-
-    public override void notifyObservers(string message)
-    {
-        observers.ForEach(observer => observer.update(message));
-    }
-
-
     private void levelUp()
     {
         _level += 1;
         AddModifier(new LevelUpModifier());
+        Health = BaseStats.MaxHealth;
         notifyObservers(PlayerConstants.OBSERVER_MESSAGE.STATS_UPDATE); 
     }
 

@@ -112,7 +112,6 @@ public class PlayerAbilitiesController : MonoBehaviour
         {
             Vector3 playerPos = transform.position;
             hitPos = hit.point;
-            playerPos.y = 0;
             direction = (hitPos - playerPos).normalized;
             hasHit = true;
             Instantiate(tempProjectile, hit.point, Quaternion.identity); // helper indicator
@@ -120,10 +119,10 @@ public class PlayerAbilitiesController : MonoBehaviour
 
         switch (_abilityState)
         {
-            case PlayerConstants.ABILITY_STATE.ABILITY_1:
+            case PlayerConstants.ABILITY_STATE.ABILITY_1: // Pillar
                 if (hasHit)
                 {
-                    AbilityScript abilityScript = AbilityOne.GetComponent<AbilityScript>();
+                    AbilityScript abilityScript = AbilityOne.GetComponent<AbilityScript>(); 
                     abilityScript.Initialize();
                     abilityScript.setAbilityStat(AbilityStat.X_SCALING, 2.0f);
                     abilityScript.Fire(Vector3.up, hitPos, ref _player);
@@ -131,12 +130,14 @@ public class PlayerAbilitiesController : MonoBehaviour
                 }
 
                 break;
-            case PlayerConstants.ABILITY_STATE.NONE:
+            case PlayerConstants.ABILITY_STATE.NONE: // Fireball
                 if (hasHit)
                 {
+                    Vector3 playerPos = transform.position;
+                    playerPos.y += 1;
                     AbilityScript abilityScript = BasicAbility.GetComponent<AbilityScript>();
                     abilityScript.Initialize();
-                    abilityScript.Fire(direction, transform.position, ref _player);
+                    abilityScript.Fire(direction, playerPos, ref _player);
                 }
                 break;
         }

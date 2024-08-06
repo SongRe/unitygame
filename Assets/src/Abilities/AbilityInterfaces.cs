@@ -76,8 +76,8 @@ public abstract class Ability
 }
 
 /// <summary>
-/// Script interface for Abilities that represent skills of the player, and will manipulate CombatScript GameObjects
-/// Should store an indicator prefab that represents the ability's preview 
+/// Script interface for Abilities that represent skills of the player, and will manipulate ProjectileCombatScript GameObjects
+/// Can store an indicator prefab that represents the ability's preview 
 /// </summary>
 public interface AbilityScript
 {
