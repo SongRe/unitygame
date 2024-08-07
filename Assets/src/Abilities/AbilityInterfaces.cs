@@ -46,7 +46,8 @@ public enum AbilityStat
     X_SCALING,
     Y_SCALING,
     Z_SCALING,
-    COOLDOWN
+    COOLDOWN,
+    ATTACK_VALUE,
 }
 
 /// <summary>

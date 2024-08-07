@@ -29,7 +29,11 @@ public class BasicMeleeEnemyClass : CombatEntity, Subject
     public override void Attacked(ref CombatEntity attacker)
     {
         Stats enemyStats = attacker.getStats();
-        Health -= (enemyStats.Attack - BaseStats.Defense * 0.1f);
+        float damage = enemyStats.Attack - BaseStats.Defense * 0.1f;
+        if (damage > 0)
+        {
+            Health -= damage;
+        }
         if (Health <= 0)
         {
             attacker.OnKill(this);
@@ -40,7 +44,11 @@ public class BasicMeleeEnemyClass : CombatEntity, Subject
     public override void Attacked(Ability ability, ref CombatEntity attacker)
     {
         AbilityStats enemyStats = ability.getAbilityStats();
-        Health -= (enemyStats.attackValue - BaseStats.Defense * 0.1f);
+        float damage = enemyStats.attackValue - BaseStats.Defense * 0.1f;
+        if (damage > 0)
+        {
+            Health -= damage;
+        }
         if (Health <= 0)
         {
             attacker.OnKill(this);
@@ -52,12 +60,6 @@ public class BasicMeleeEnemyClass : CombatEntity, Subject
     {
         return Health;
     }
-
-    public override Stats getStats()
-    {
-        return BaseStats;
-    }
-
 
     public override void OnKill(CombatEntity killed_entity)
     {

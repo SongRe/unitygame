@@ -12,6 +12,7 @@ public class PillarAbility : Ability
         abilityStats.yScaling = 1;
         abilityStats.zScaling = 1;
         abilityStats.cooldown = 2.0f;
+        abilityStats.attackValue = 0.0f;
     }
     public override void AddModifier(OnHitModifier modifier)
     {

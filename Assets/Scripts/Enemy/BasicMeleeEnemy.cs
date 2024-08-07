@@ -6,7 +6,6 @@ using UnityEngine;
 public class BasicMeleeEnemy : MonoBehaviour, EnemyCombatantScript, Observer
 {
     public GameObject player; // To track towards
-    public LayerMask terrainLayermask;
     public float speed = 2.0f;
     public float y_offset = 1.0f; // how high off the ground we should be
 
@@ -37,11 +36,6 @@ public class BasicMeleeEnemy : MonoBehaviour, EnemyCombatantScript, Observer
     // Update is called once per frame
     void Update()
     {
-        _raycastPollingTime -= Time.deltaTime;
-        if (_raycastPollingTime <= 0)
-        {
-            _raycastPollingTime = TechnicalConstants.RAYCASTING.POLLING_RATE;
-        }
     }
 
     public void OnTriggerEnter(Collider other)
@@ -83,7 +77,7 @@ public class BasicMeleeEnemy : MonoBehaviour, EnemyCombatantScript, Observer
         if (player != null)
         {
             Vector3 playerPos = player.transform.position;
-            playerPos.y += 1;
+            playerPos.y += y_offset;
             Vector3 directionToPlayer = playerPos - transform.position;
             //directionToPlayer.y = playerPos.y;
             directionToPlayer.Normalize();

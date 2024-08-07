@@ -11,6 +11,7 @@ public class FireballAbility : Ability
         abilityStats.xScaling = 1.0f;
         abilityStats.yScaling = 1.0f;
         abilityStats.zScaling = 1.0f;
+        abilityStats.attackValue = 0.0f;
     }
     public override void AddModifier(OnHitModifier modifier)
     {

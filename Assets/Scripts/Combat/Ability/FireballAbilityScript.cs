@@ -73,6 +73,9 @@ public class FireballAbilityScript : MonoBehaviour, AbilityScript
                 case AbilityStat.Z_SCALING:
                     _ability.setZScaling(value);
                     break;
+                case AbilityStat.ATTACK_VALUE:
+                    _ability.setAttackValue(value);
+                    break;
                 default:
                     print("undefined abilitystat");
                     break;
