@@ -1772,6 +1772,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 998051737}
+    - target: {fileID: 3456943935504113177, guid: 287ecd3ce745c5f46a70f6ec9e7a55ce, type: 3}
+      propertyPath: BasicEnemy
+      value: 
+      objectReference: {fileID: 937817524930184359, guid: 3a42348ab54b86346a3580ac221603d0, type: 3}
     - target: {fileID: 5834975686744097007, guid: 287ecd3ce745c5f46a70f6ec9e7a55ce, type: 3}
       propertyPath: m_Name
       value: GameLogicController
