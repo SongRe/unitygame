@@ -4,4 +4,4 @@
   - 3D RPG Style
 
 ### Game Demo
-[(https://img.youtube.com/vi/jHKQhQtyu4I/maxresdefault.jpg)](https://www.youtube.com/watch?v=jHKQhQtyu4I)
+[![Watch the video](https://img.youtube.com/vi/jHKQhQtyu4I/maxresdefault.jpg)](https://www.youtube.com/watch?v=jHKQhQtyu4I)
